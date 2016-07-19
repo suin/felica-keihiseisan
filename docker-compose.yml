@@ -1,0 +1,29 @@
+web:
+  build: .
+  command: bundle exec rails s -b '0.0.0.0'
+  volumes:
+    - .:/app
+  environment:
+    VIRTUAL_HOST: rails.docker
+  links:
+    - db
+
+db:
+  image: mysql:5.7
+  command: >
+    bash -c '
+    touch /var/log/mysql/general.log &&
+    chown mysql:mysql /var/log/mysql/general.log &&
+    tail -f /var/log/mysql/general.log &
+    /entrypoint.sh mysqld
+    --character-set-server=utf8mb4
+    --collation-server=utf8mb4_general_ci
+    --general-log=true
+    --general-log-file=/var/log/mysql/general.log
+    '
+  # /dev/stdout is not writable by mysql user. See https://github.com/docker/docker/issues/6880
+  ports:
+    - "3310:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: app

@@ -1,0 +1,2 @@
+FROM reoring/rails
+
