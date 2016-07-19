@@ -3,6 +3,7 @@ ruby '2.3.1'
 source 'https://rubygems.org'
 
 gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'slack-notifier'
 
 # Plus integrations with:
 gem 'devise'

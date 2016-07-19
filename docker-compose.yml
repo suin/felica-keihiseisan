@@ -5,6 +5,7 @@ web:
     - .:/app
   environment:
     VIRTUAL_HOST: rails.docker
+    SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
   links:
     - db
 

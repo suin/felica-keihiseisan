@@ -84,5 +84,13 @@ class SuicaHistory < ActiveRecord::Base
         )
       end
     end
+
+    def find_last_history(card_id)
+      SuicaHistory
+        .where(card_id: card_id)
+        .order(serial_number: :desc)
+        .limit(1)
+        .first
+    end
   end
 end

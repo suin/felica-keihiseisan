@@ -10,4 +10,9 @@ class Card < ActiveRecord::Base
       "#{holder_name} (#{card_name})"
     end
   end
+
+  def card_text
+    holder_name = holder ? holder.name + 'さん' : '所有者不明'
+    card_name = name.empty? ? idm : name
+  end
 end
